@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You 💖</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+    color:white;
+
+    background:
+        radial-gradient(circle at 50% 40%,
+        #601878,
+        #25103e 40%,
+        #090313 80%);
+}
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+#stars{
+    position:fixed;
+    inset:0;
+    z-index:0;
+}
+
+.star{
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:white;
+    border-radius:50%;
+
+    box-shadow:
+        0 0 8px white;
+
+    animation:
+        twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+
+    from{
+        opacity:.2;
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+
+}
+
+
+/* =====================================================
+   FLOATING HEART
+===================================================== */
+
+.float{
+    position:fixed;
+
+    z-index:2;
+
+    font-size:40px;
+
+    pointer-events:none;
+
+    animation:
+        floatUp 5s ease-in-out infinite;
+}
+
+@keyframes floatUp{
+
+    0%,100%{
+        transform:
+            translateY(20px)
+            rotate(-10deg);
+    }
+
+    50%{
+        transform:
+            translateY(-80px)
+            rotate(15deg);
+    }
+
+}
+
+.f1{
+    left:7%;
+    top:20%;
+}
+
+.f2{
+    right:8%;
+    top:25%;
+    animation-delay:1s;
+}
+
+.f3{
+    left:15%;
+    bottom:15%;
+    animation-delay:2s;
+}
+
+.f4{
+    right:15%;
+    bottom:12%;
+    animation-delay:1.5s;
+}
+
+
+/* =====================================================
+   STEP SYSTEM
+===================================================== */
+
+.step{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:
+        scale(.85)
+        translateY(40px);
+
+    transition:
+        .8s ease;
+
+    z-index:5;
+}
+
+.step.active{
+
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:
+        scale(1)
+        translateY(0);
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+    width:min(95%,650px);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    text-align:center;
+
+    padding:40px 25px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.2);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+
+        0 0 50px
+        rgba(255,20,147,.3),
+
+        inset 0 0 30px
+        rgba(255,255,255,.04);
+
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.small{
+
+    font-size:13px;
+
+    letter-spacing:4px;
+
+    color:#ff9fda;
+
+    text-transform:uppercase;
+
+}
+
+h1{
+
+    margin-top:15px;
+
+    font-size:
+        clamp(40px,9vw,75px);
+
+    color:#ff8ed4;
+
+    text-shadow:
+
+        0 0 10px #ff4dbb,
+
+        0 0 30px #ff1493,
+
+        0 0 60px #ff008c;
+
+}
+
+h2{
+
+    font-size:
+        clamp(28px,6vw,50px);
+
+    color:#ff9bdd;
+
+    margin-bottom:20px;
+
+}
+
+p{
+
+    line-height:1.8;
+
+    color:#ffe2f5;
+
+}
+
+
+/* =====================================================
+   PHOTO
+===================================================== */
+
+.photo{
+
+    width:190px;
+    height:190px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:
+        5px solid white;
+
+    margin:20px auto;
+
+    display:block;
+
+    box-shadow:
+
+        0 0 20px #ff75cf,
+
+        0 0 50px #ff1493,
+
+        0 0 90px
+        rgba(255,20,147,.5);
+
+    animation:
+
+        photoFloat 4s
+        ease-in-out
+        infinite;
+
+}
+
+@keyframes photoFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+}
+
+
+/* =====================================================
+   NAME
+===================================================== */
+
+.name{
+
+    font-size:
+        clamp(28px,7vw,50px);
+
+    font-weight:bold;
+
+    color:white;
+
+    text-shadow:
+        0 0 15px #ff1493;
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+button{
+
+    margin-top:30px;
+
+    padding:
+        14px 30px;
+
+    border:none;
+
+    border-radius:50px;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    background:
+        linear-gradient(
+            45deg,
+            #ff007f,
+            #ff65c5
+        );
+
+    box-shadow:
+
+        0 0 20px
+        rgba(255,20,147,.7);
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 0 40px #ff1493;
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress{
+
+    position:fixed;
+
+    top:20px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index:50;
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+.dot{
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.3);
+
+    transition:.4s;
+
+}
+
+.dot.active{
+
+    background:#ff54bd;
+
+    box-shadow:
+        0 0 15px #ff1493;
+
+}
+
+
+/* =====================================================
+   PHOTO RING
+===================================================== */
+
+.photo-box{
+
+    position:relative;
+
+    display:inline-block;
+
+}
+
+.photo-box::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-15px;
+
+    border:
+
+        2px dashed
+        #ff65c5;
+
+    border-radius:50%;
+
+    animation:
+        rotate 8s linear infinite;
+
+}
+
+@keyframes rotate{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+.final-heart{
+
+    font-size:80px;
+
+    animation:
+
+        heartBeat 1s
+        infinite;
+
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.25);
+    }
+
+}
+
+
+/* =====================================================
+   FIREWORK
+===================================================== */
+
+.firework{
+
+    position:fixed;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    z-index:100;
+
+    animation:
+        explode 1.5s
+        forwards;
+
+}
+
+@keyframes explode{
+
+    0%{
+
+        transform:scale(.2);
+
+        opacity:1;
+
+        box-shadow:
+            0 0 0 transparent;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:0;
+
+        box-shadow:
+
+            0 -100px #ff4db8,
+            70px -70px #ffe66d,
+            100px 0 #70f7ff,
+            70px 70px #ff6b6b,
+            0 100px #ff4db8,
+            -70px 70px #9d7cff,
+            -100px 0 #ffe66d,
+            -70px -70px #70f7ff;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .card{
+
+        padding:
+            30px 18px;
+
+    }
+
+    .photo{
+
+        width:150px;
+        height:150px;
+
+    }
+
+    p{
+
+        font-size:14px;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     STARS
+===================================================== -->
+
+<div id="stars"></div>
+
+
+<!-- =====================================================
+     FLOATING OBJECT
+===================================================== -->
+
+<div class="float f1">💖</div>
+
+<div class="float f2">💕</div>
+
+<div class="float f3">✨</div>
+
+<div class="float f4">💗</div>
+
+
+<!-- =====================================================
+     PROGRESS
+===================================================== -->
+
+<div class="progress">
+
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+
+</div>
+
+
+<!-- =====================================================
+     STEP 1
+===================================================== -->
+
+<section class="step active">
+
+<div class="card">
+
+    <div class="small">
+        Ada sesuatu untukmu...
+    </div>
+
+    <h1>
+        Hey... 💕
+    </h1>
+
+    <p>
+
+        Sebelum kamu melanjutkan...
+
+        <br><br>
+
+        Aku ingin kamu tahu bahwa
+        hari ini bukan hari biasa.
+
+        <br><br>
+
+        Ada seseorang yang ingin memberikan
+        sesuatu yang spesial untukmu. ✨
+
+    </p>
+
+    <button onclick="nextStep()">
+
+        Buka Ceritanya 💌
+
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 2
+===================================================== -->
+
+<section class="step">
+
+<div class="card">
+
+    <div class="small">
+        Step 02
+    </div>
+
+    <h2>
+        Ada satu hal...
+    </h2>
+
+    <p>
+
+        Mungkin kamu nggak sadar...
+
+        <br><br>
+
+        Tapi keberadaanmu bisa membuat
+        suasana menjadi lebih indah.
+
+        <br><br>
+
+        Senyummu sederhana,
+        tapi bisa membuat seseorang
+        ikut tersenyum.
+
+        <br><br>
+
+        Dan hari ini...
+
+        <br>
+
+        <b style="color:#ff8ed4;">
+            hari itu adalah hari spesialmu.
+        </b>
+
+    </p>
+
+    <button onclick="nextStep()">
+
+        Lanjut 💖
+
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 3
+===================================================== -->
+
+<section class="step">
+
+<div class="card">
+
+    <div class="small">
+        Step 03
+    </div>
+
+    <h2>
+        This Beautiful Girl 💕
+    </h2>
+
+
+    <div class="photo-box">
+
+        <!-- FOTO DI SINI -->
+
+        <img
+            src="AMEL.jpg"
+            class="photo"
+            alt="Foto">
+
+    </div>
+
+
+    <div class="name">
+
+        AMEL 💗
+
+    </div>
+
+
+    <p style="margin-top:15px;">
+
+        Seseorang yang hari ini
+        sedang bertambah usia...
+
+        <br>
+
+        tapi semoga tidak pernah
+        kehilangan senyumnya. 🌸
+
+    </p>
+
+
+    <button onclick="nextStep()">
+
+        Ada Lagi 🎁
+
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 4
+===================================================== -->
+
+<section class="step">
+
+<div class="card">
+
+    <div class="small">
+        Step 04
+    </div>
+
+    <h2>
+        Happy Birthday 🎂
+    </h2>
+
+    <p>
+
+        Selamat ulang tahun,
+        <b style="color:#ff8ed4;">
+            AMEL
+        </b>
+        💖
+
+        <br><br>
+
+        Semoga di umur yang baru,
+        kamu mendapatkan lebih banyak
+        kebahagiaan daripada kesedihan.
+
+        <br><br>
+
+        Semoga semua hal baik
+        datang kepadamu.
+
+        <br><br>
+
+        Semoga apa yang kamu semogakan
+        selama ini perlahan menjadi kenyataan.
+
+        <br><br>
+
+        Dan yang paling penting...
+
+        <br><br>
+
+        <b style="color:#ff8ed4;">
+
+            Jangan pernah berhenti
+            menjadi dirimu sendiri.
+
+        </b>
+
+        <br><br>
+
+        Karena kamu sudah cukup
+        istimewa dengan caramu sendiri. 💕
+
+    </p>
+
+
+    <button onclick="nextStep()">
+
+        Satu kejutan terakhir... ✨
+
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     STEP 5
+===================================================== -->
+
+<section class="step">
+
+<div class="card">
+
+    <div class="final-heart">
+        💖
+    </div>
+
+    <h1>
+        Happy Birthday!
+    </h1>
+
+    <h2>
+        AMEL 🌸
+    </h2>
+
+    <p>
+
+        Semoga panjang umur.
+
+        <br>
+
+        Semoga sehat selalu.
+
+        <br>
+
+        Semoga semakin cantik.
+
+        <br>
+
+        Semoga semakin bahagia.
+
+        <br><br>
+
+        Dan semoga...
+
+        <br>
+
+        <b style="color:#ff8ed4;">
+
+            semua impianmu
+            menjadi kenyataan. ✨
+
+        </b>
+
+        <br><br>
+
+        🎂 💐 💖 🎈 ✨
+
+    </p>
+
+
+    <button onclick="surprise()">
+
+        🎆 KLIK UNTUK KEJUTAN 🎆
+
+    </button>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* =====================================================
+   CREATE STARS
+===================================================== */
+
+const stars =
+document.getElementById("stars");
+
+for(let i=0;i<120;i++){
+
+    const star =
+    document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+        Math.random()*100+"%";
+
+    star.style.top =
+        Math.random()*100+"%";
+
+    star.style.animationDelay =
+        Math.random()*3+"s";
+
+    stars.appendChild(star);
+
+}
+
+
+/* =====================================================
+   STEP SYSTEM
+===================================================== */
+
+let currentStep = 0;
+
+const steps =
+document.querySelectorAll(".step");
+
+const dots =
+document.querySelectorAll(".dot");
+
+
+function nextStep(){
+
+    if(currentStep >= steps.length-1){
+
+        surprise();
+
+        return;
+
+    }
+
+
+    steps[currentStep]
+        .classList.remove("active");
+
+    dots[currentStep]
+        .classList.remove("active");
+
+
+    currentStep++;
+
+
+    steps[currentStep]
+        .classList.add("active");
+
+    dots[currentStep]
+        .classList.add("active");
+
+}
+
+
+/* =====================================================
+   FIREWORK SURPRISE
+===================================================== */
+
+function surprise(){
+
+    for(let i=0;i<20;i++){
+
+        setTimeout(()=>{
+
+            const fw =
+            document.createElement("div");
+
+            fw.className="firework";
+
+            fw.style.left =
+                Math.random()*90+5+"vw";
+
+            fw.style.top =
+                Math.random()*60+5+"vh";
+
+            document.body
+                .appendChild(fw);
+
+
+            setTimeout(()=>{
+
+                fw.remove();
+
+            },1600);
+
+
+        },i*180);
+
+    }
+
+
+    createHearts();
+
+}
+
+
+/* =====================================================
+   FALLING HEARTS
+===================================================== */
+
+function createHearts(){
+
+    for(let i=0;i<60;i++){
+
+        setTimeout(()=>{
+
+            const heart =
+            document.createElement("div");
+
+            heart.innerHTML =
+                ["💖","💕","💗","💘","✨"]
+                [
+                    Math.floor(
+                        Math.random()*5
+                    )
+                ];
+
+
+            heart.style.position="fixed";
+
+            heart.style.left =
+                Math.random()*100+"vw";
+
+            heart.style.top="-40px";
+
+            heart.style.fontSize =
+                20+Math.random()*30+"px";
+
+            heart.style.zIndex="200";
+
+            document.body
+                .appendChild(heart);
+
+
+            const duration =
+                3000+
+                Math.random()*3000;
+
+
+            heart.animate(
+
+                [
+
+                    {
+                        transform:
+                        "translateY(0) rotate(0)",
+                        opacity:0
+                    },
+
+                    {
+                        transform:
+                        "translateY(50vh) rotate(180deg)",
+                        opacity:1
+                    },
+
+                    {
+                        transform:
+                        "translateY(110vh) rotate(360deg)",
+                        opacity:0
+                    }
+
+                ],
+
+                {
+
+                    duration:
+
+                        duration,
+
+                    easing:
+                        "ease-in"
+
+                }
+
+            );
+
+
+            setTimeout(()=>{
+
+                heart.remove();
+
+            },duration);
+
+
+        },i*70);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
